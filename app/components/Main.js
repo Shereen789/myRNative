@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View,TextInput,ScrollView,TouchableOpacity} from 'react-native';
 import Note from './Note';
+import DatePicker from 'react-native-datepicker';
 
 export default class Main extends React.Component{
     constructor(props){
         super(props);
         this.state ={
+            date : '',
             noteArray:[],
             noteText: '',
         }
@@ -31,8 +33,28 @@ export default class Main extends React.Component{
             onChangeText ={(noteText)=> this.setState({noteText})}
             value={this.state.noteText}
             underlineColorAndroid = 'transparent'>
-
             </TextInput>
+            <DatePicker style={{width: 200}}
+              date={this.state.date}
+              mode="date"
+              placeholder="select date"
+              format="YYYY-MM-DD"
+              minDate="2016-05-01"
+              maxDate="2025-06-01"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              customStyles={{
+                dateIcon: {
+                  position: 'absolute',
+                  left: 0,
+                  top: 4,
+                  marginLeft: 0
+                },
+                dateInput: {
+                  marginLeft: 36
+                }
+              }}
+              onDateChange={(date) => {this.setState({date: date})}}/>
         </View>
         <TouchableOpacity onPress={this.addNote.bind(this)} style = {styles.addButton}>
             <Text style={styles.addButtonText}>Add</Text>
