@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Button,View,TextInput,ScrollView,TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View,TextInput,ScrollView,TouchableOpacity} from 'react-native';
 import Note from './Note';
 
 export default class Main extends React.Component{
@@ -12,7 +12,8 @@ export default class Main extends React.Component{
     }
 
     render(){
-      let notes= this.state.noteArray.map((val,key)=>{return <Note key ={key} keyval = {key} val ={val}
+      let notes= this.state.noteArray.map((val,key)=>{
+        return <Note key ={key} keyval = {key} val ={val}
                 deleteMethod={()=> this.deleteNote(key)}/>
         });
       return (
@@ -32,23 +33,21 @@ export default class Main extends React.Component{
             underlineColorAndroid = 'transparent'>
 
             </TextInput>
-            <Button title ="+"
-            onPress={this.addNote.bind(this)}
-            style = {styles.addButton}>
-  </Button>
         </View>
-
+        <TouchableOpacity onPress={this.addNote.bind(this)} style = {styles.addButton}>
+            <Text style={styles.addButtonText}>Add</Text>
+        </TouchableOpacity>
         </View>
         );
     }
     addNote(){
-      // alert("Help")
+      // alert("Help!!")
         if(this.state.noteText){
             var d = new Date();
             console.log(d);
             this.state.noteArray.push({
                 'date': d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate(),
-            });
+              'note':this.state.noteText});
             this.setState({noteArray: this.state.noteArray})
             this.setState({noteText:''});
 
