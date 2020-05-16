@@ -61,26 +61,25 @@ export default class Main extends React.Component{
         </View>
         );
     }
-    addNote(){
-      // alert("Help!!")
-        if(this.state.noteText){
-            var d = this.state.date;
-            console.log(d);
-            this.state.noteArray.push({
-                'date': d[0]+"/"+d[1]+"/"+d[2],
-              'note':this.state.noteText});
-            this.setState({noteArray: this.state.noteArray})
-            this.setState({noteText:''});
-
-        }
+    addNote() {
+      if (this.state.noteText) {
+        var d = this.state.date;
+        d = d.split("-");
+        this.state.noteArray.push({
+          date: d[0] + "/" + d[1] + "/" + d[2],
+          note: this.state.noteText,
+        });
+        this.setState({ noteArray: this.state.noteArray });
+        this.setState({ noteText: "" });
+      }
     }
-    deleteNote(key){
-
+    deleteNote(key) {
       // alert('Deliete')
-      this.state.noteArray.splice(key,1);
-      this.setState({noteArray:this.state.noteArray})
+      this.state.noteArray.splice(key, 1);
+      this.setState({ noteArray: this.state.noteArray });
     }
-}
+  }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header:{
-    backgroundColor:'crimson',
+    backgroundColor:'indigo',
     alignItems:'center',
     justifyContent:'center',
     borderBottomWidth:10,
@@ -106,7 +105,7 @@ const styles = StyleSheet.create({
     marginBottom:100,
   },
   footer:{
-    backgroundColor:'pink',
+    backgroundColor:'navy',
     height:50,
     bottom:0,
     left:0,
@@ -120,14 +119,14 @@ const styles = StyleSheet.create({
 
     borderTopWidth:2,
 
-    color:'black'
+    color:'white'
   },
   addButton:{
     position:'absolute',
     zIndex:11,
     right:20,
     bottom:90,
-    backgroundColor:'#E91E63',
+    backgroundColor:'navy',
     width:90,
     height:90,
     // borderRadius:50,
