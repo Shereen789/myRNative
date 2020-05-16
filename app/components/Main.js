@@ -34,13 +34,12 @@ export default class Main extends React.Component{
             value={this.state.noteText}
             underlineColorAndroid = 'transparent'>
             </TextInput>
-            <DatePicker style={{width: 200}}
+            <DatePicker style={styles.date}
               date={this.state.date}
               mode="date"
+              onPress={(date)=>this.setState({date})}
               placeholder="select date"
               format="YYYY-MM-DD"
-              minDate="2016-05-01"
-              maxDate="2025-06-01"
               confirmBtnText="Confirm"
               cancelBtnText="Cancel"
               customStyles={{
@@ -65,10 +64,10 @@ export default class Main extends React.Component{
     addNote(){
       // alert("Help!!")
         if(this.state.noteText){
-            var d = new Date();
+            var d = this.state.date;
             console.log(d);
             this.state.noteArray.push({
-                'date': d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate(),
+                'date': d[0]+"/"+d[1]+"/"+d[2],
               'note':this.state.noteText});
             this.setState({noteArray: this.state.noteArray})
             this.setState({noteText:''});
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header:{
-    backgroundColor:'#E91E63',
+    backgroundColor:'crimson',
     alignItems:'center',
     justifyContent:'center',
     borderBottomWidth:10,
@@ -140,4 +139,8 @@ const styles = StyleSheet.create({
     color:'#fff',
     fontSize:24,
   },
+  date:{
+    width:200,
+
+  }
 });
